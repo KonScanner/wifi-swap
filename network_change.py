@@ -1,12 +1,9 @@
 import subprocess as sp
-import time
-
 
 data = sp.check_output(['netsh', 'wlan', 'show', 'interfaces']).decode(
     'utf-8', errors="backslashreplace").split('\n')
 
 x = [i.split(":")[1] for i in data if "Profile" in i]
-sleep = time.sleep(0.15)
 
 
 def connected(channel: str) -> str:

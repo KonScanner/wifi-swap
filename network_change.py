@@ -13,6 +13,9 @@ def connected(channel: str) -> str:
     if 'is not available to connect' in connection:
         connected(channel)
 
+    else:
+        sp.call("cmd /c exit")
+
 
 for j in x:
     if x == []:

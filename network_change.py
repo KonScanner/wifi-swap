@@ -1,4 +1,5 @@
 import subprocess as sp
+import time
 
 data = sp.check_output(['netsh', 'wlan', 'show', 'interfaces']).decode(
     'utf-8', errors="backslashreplace").split('\n')
@@ -11,6 +12,8 @@ def connected(channel: str) -> str:
         ["cmd", "/c", "netsh", "wlan", "connect", "name={}".format(channel)]).decode('utf-8', errors="backslashreplace").split('\n')
 
     if 'is not available to connect' in connection:
+        sp.call("netsh wlan show interfaces")
+        time.sleep(0.1)
         connected(channel)
 
     else:

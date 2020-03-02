@@ -6,6 +6,8 @@ data = sp.check_output(['netsh', 'wlan', 'show', 'interfaces']).decode(
 
 x = [i.split(":")[1] for i in data if "Profile" in i]
 
+channel_1, channel_2 = 'Network_Channel_1', 'Network_Channel_2'
+
 
 def connected(channel: str) -> str:
     connection = sp.check_output(
@@ -22,10 +24,10 @@ def connected(channel: str) -> str:
 
 for j in x:
     if x == []:
-        connected('Network_Channel_1')
+        connected(channel_1)
 
-    elif 'Network_Channel_1' in str(j.strip()):
-        connected('Network_Channel_2')
+    elif channel_1 in str(j.strip()):
+        connected(channel_2)
 
-    elif 'Network_Channel_2' in str(j.strip()):
-        connected('Network_Channel_1')
+    elif channel_2 in str(j.strip()):
+        connected(channel_1)
